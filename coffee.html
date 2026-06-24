@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Coffee Shop</title>
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    margin:0;
+    background:#fff8f0;
+}
+
+
+header{
+    background:#4b2e1e;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+
+.products{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    padding:30px;
+}
+
+
+.card{
+    background:white;
+    width:260px;
+    padding:20px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 5px 10px gray;
+}
+
+
+.card img{
+    width:150px;
+    height:200px;
+    border-radius:10px;
+}
+
+
+.price{
+    color:#8b4513;
+    font-size:22px;
+    font-weight:bold;
+}
+
+
+input,textarea,select{
+    padding:10px;
+    margin:5px;
+}
+
+
+button{
+    background:#8b4513;
+    color:white;
+    border:0;
+    padding:12px 25px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+
+button:hover{
+    background:#4b2e1e;
+}
+
+
+.cart{
+    background:white;
+    width:350px;
+    margin:20px auto;
+    padding:20px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 5px 10px gray;
+}
+
+
+#paymentPage{
+
+    display:none;
+    text-align:center;
+    padding:40px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>☕ ရဲမွန်တောင် ရွာငံကော်ဖီစစ်စစ် </h1>
+</header>
+
+
+
+
+<div class="products">
+
+
+<div class="card">
+
+<img src="coffee_pic/100g-Photoroom.png">
+
+<h2>100kg</h2>
+
+<p class="price">12000 kyats</p>
+
+Quantity:
+
+<input id="q1" type="number" value="1" min="1">
+
+<br>
+
+<button onclick="add('100kg',12000,'q1')">
+Add Cart
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<img src="coffee_pic/200g-Photoroom.png">
+
+<h2>200kg</h2>
+
+<p class="price">23000 kyats</p>
+
+Quantity:
+
+<input id="q2" type="number" value="1" min="1">
+
+<br>
+
+<button onclick="add('200kg',23000,'q2')">
+Add Cart
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<img src="coffee_pic/500g-Photoroom.png">
+
+<h2>5000kg</h2>
+
+<p class="price">53000 kyats</p>
+
+Quantity:
+
+<input id="q3" type="number" value="1" min="1">
+
+<br>
+
+<button onclick="add('500kg',53000,'q3')">
+Add Cart
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<img src="coffee_pic/drip-Photoroom.png">
+
+<h2>Drip Coffee 10 packs</h2>
+
+<p class="price">37000 kyats</p>
+
+Quantity:
+
+<input id="q4" type="number" value="1" min="1">
+
+<br>
+
+<button onclick="add('Drip Coffee 10 packs',37000,'q4')">
+Add Cart
+</button>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="cart">
+
+
+<h2>🛒 ငွေပေးချေရန်</h2>
+
+
+<p id="cart">
+Empty
+</p>
+
+
+<h3>
+Total: Kyats <span id="total">0</span>
+</h3>
+
+
+
+<select id="method">
+
+<option>KBZ Pay</option>
+
+</select>
+
+
+<br>
+
+
+<button onclick="checkout()">
+Checkout
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="paymentPage">
+
+
+<h1>☕ ငွေပေးချေ</h1>
+
+
+<h2>
+Total: Kyats <span id="payTotal"></span>
+</h2>
+
+
+<h3>Scan QR Code</h3>
+
+
+<img src="coffee_pic/qr.jpg">
+
+<p> Kpay QR ကုဒ်ဖတ်ပြီး 
+    Note တွင် မိမိ၏နာမည်၊ နေရပ်လိပ်စာ၊ 
+    မှာယူသည့် Coffee နာမည်ရေးပေးပါ။</p>
+<p> တိုက်ရိုက်မှာယူရန် 📞 09-250171407</p>
+
+<br><br>
+
+</div>
+<script>
+
+let total=0;
+let items=[];
+function add(name,price,id){
+let qty=document.getElementById(id).value;
+total += price*qty;
+items.push(name+" x "+qty);
+document.getElementById("cart").innerHTML =
+items.join("<br>");
+document.getElementById("total").innerHTML =
+total;
+}
+function checkout(){
+document.querySelector(".products").style.display="none";
+document.querySelector(".cart").style.display="none";
+document.getElementById("paymentPage").style.display="block";
+document.getElementById("payTotal").innerHTML=total;
+}
+function finish(){
+let name=document.getElementById("name").value;
+let address=document.getElementById("address").value;
+
+alert(
+"Payment Successful!\n\n"+
+"Customer: "+name+
+"\nAddress: "+address+
+"\nThank you for buying ☕"
+);
+}
+
+</script>
+</body>
+</html>
